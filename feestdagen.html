@@ -7,30 +7,12 @@
 
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
+            font-family: Arial;
             padding: 20px;
-        }
-
-        .card {
-            background: white;
-            padding: 20px;
-            max-width: 400px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            margin-top: 0;
         }
 
         .feestdag {
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .feestdag:last-child {
-            border-bottom: none;
+            padding: 10px 0; /* padding makes sure the text is more spaced from the side */
         }
     </style>
 </head>
@@ -57,7 +39,7 @@
             })
             .then(data => {
 
-                // Filter aankomende feestdagen
+                // Filter the upcoming holidays
                 const upcomingHolidays = data.filter(holiday => {
                     return new Date(holiday.date) >= today;
                 });
@@ -69,7 +51,7 @@
 
                 const container = document.getElementById("feestdagen");
 
-                // Check of er nog feestdagen zijn
+                // Check if there are any upcoming holidays this year
                 if (upcomingHolidays.length === 0) {
                     container.innerHTML = "Geen feestdagen meer dit jaar.";
                     return;
@@ -79,6 +61,7 @@
 
                 container.innerHTML = "";
 
+                // format the date in a readable format
                 nextThree.forEach(h => {
                     const datum = new Date(h.date).toLocaleDateString("nl-NL", {
                         weekday: "long",
